@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Invitation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            font-family: "Microsoft YaHei", sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        h1 { color: #d02090; margin-bottom: 20px; font-size: 2rem; }
+        p { color: #888; margin-bottom: 40px; }
+        .btn-group { position: relative; width: 100%; height: 100px; }
+        button {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        #accept { background-color: #ff69b4; color: white; }
+        #decline { background-color: #ffffff; color: #999; position: absolute; left: 55%; }
+        .heart { position: fixed; pointer-events: none; animation: fly linear forwards; }
+        @keyframes fly { to { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <h1 id="title-text">邀请美丽的菲菲一起跨年 &#127801;</h1>
+        <p id="sub-text">2024 的终点，2025 的起点，我想和你一起。</p>
+
+        <div class="btn-group">
+            <button id="accept" onclick="showSuccess()">好呀！</button>
+            <button id="decline" onmouseover="moveButton()" onclick="moveButton()">拒绝</button>
+        </div>
+    </div>
+
+    <div id="success-page" style="display:none;">
+        <h1 style="font-size: 3rem;">&#127878; 太棒了！</h1>
+        <h2>那就约定好了，跨年不见不散！ ❤️</h2>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('decline');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.innerText = "点不着我~";
+        }
+
+        function showSuccess() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('success-page').style.display = 'block';
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
